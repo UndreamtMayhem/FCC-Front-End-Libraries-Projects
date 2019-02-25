@@ -51,10 +51,11 @@ const soundBank = [
 ];
 
 class Display extends React.Component {
+
   render() {
     return <header id="display" className="App-header">
-      <p>Display from component</p>
-      <p>To be implemented</p>
+      <p>Display from component To be implemented</p>
+      <p>{this.props.text}</p>
     </header>
 
   }
@@ -63,9 +64,6 @@ class Display extends React.Component {
 class DrumButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isToggleOn: true
-    };
 
     // This binding is necessary to make `this` work in the callback
     this.playSound = this
@@ -74,10 +72,12 @@ class DrumButton extends React.Component {
     this.handleKeyPress = this
       .handleKeyPress
       .bind(this);
+
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyPress);
+
   }
 
   componentWillUnmount() {
@@ -92,14 +92,18 @@ class DrumButton extends React.Component {
 
   playSound(e) {
     const sound = document.getElementById(this.props.keyTrigger);
+    this
+      .props
+      .displaySoundFileName(this.props.soundId);
+
     sound.play();
+
   }
 
   render() {
     return (
       <div id={this.props.soundId} onClick={this.playSound}>
         <audio
-          controls
           id={this.props.keyTrigger}
           src={this.props.source}
           onKeyPress={this.handleKeyPress}></audio>
@@ -118,6 +122,7 @@ class PadBank extends React.Component {
       .soundBank
       .map((drumObj, i, padBankArr) => {
         return (<DrumButton
+          displaySoundFileName={this.props.displaySoundFileName}
           soundId={padBankArr[i].id}
           key={padBankArr[i].keyTrigger}
           keyCode={padBankArr[i].keyCode}
@@ -127,9 +132,7 @@ class PadBank extends React.Component {
 
     return <div className="padBank">
 
-      <p>TODO</p>
       <div>{padBank}</div>
-
     </div >;
   }
 }
@@ -139,17 +142,29 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bankSet: soundBank
+      bankSet: soundBank,
+      display: "-"
     }
+    this.displaySoundFileName = this
+      .displaySoundFileName
+      .bind(this);
+  }
+
+  displaySoundFileName(name) {
+    this.setState({display: name});
   }
 
   render() {
     return (
-      <div id="drum-machine" className="App">
 
-        <Display/>
-        <PadBank soundBank={this.state.bankSet}/>
+      <div id="drum-machine" className="App">
+        <Display text={this.state.display}/>
+
+        <PadBank
+          soundBank={this.state.bankSet}
+          displaySoundFileName={this.displaySoundFileName}/> {this.state.display}
       </div>
+
     );
   }
 }
