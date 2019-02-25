@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>370</x>
+      <y>50</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>operationFunc</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>340</x>
+      <y>400</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Equals</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>60</x>
+      <y>0</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>numberFunc</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>40</x>
+      <y>90</y>
+      <w>150</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>function bounded to 
+1,2,3,4,5,6,7,8,9,0
+
+halign=left
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>60</x>
+      <y>210</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Logic</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>0</x>
+      <y>270</y>
+      <w>260</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>- when a number clicked
+- validate entry parseFloat
+- check if operation pressed
+	true 
+		sumOperationFun(output, entry)
+		result += result operation buttonVal 
+	false
+		+= value 
+		cases like 1 + 1 = 11
+
+halign=left
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>290</x>
+      <y>480</y>
+      <w>260</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>sumOperationFun(output, entry)
+if +  = true
+	output + entry
+if - = true
+	output - entry
+
+if * = true
+	output * entry
+if / = true
+	output / entry
+return null
+
+halign=left
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>560</x>
+      <y>480</y>
+      <w>260</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>equalFunc()
+
+- check what operation is active
+	- e.g add 
+		- output + entry value
+
+halign=left
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>480</x>
+      <y>50</y>
+      <w>260</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>setOperationFun(value)
+if  value = + 
+	 addValue = true
+if value = -
+	subValue = true
+if  value = /
+	divideValue = true
+if value = *
+	multiValue = true 
+
+halign=left
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
