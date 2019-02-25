@@ -61,20 +61,48 @@ class Display extends React.Component {
 }
 
 class PadBank extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <div className="padBank">Hello, {this.props.name}
-    <p>TODO</p>
+    const sounds = this
+      .props
+      .soundBank
+      .map((drumObj, i, padBankArr) => {
+        return (
+          <div key={padBankArr[i].keyTrigger}>
+
+            <p>{padBankArr[i].keyCode}</p>
+            <audio controls src={padBankArr[i].url}></audio>
+
+          </div>
+        )
+
+      });
+
+    return <div className="padBank">
+      <p>TODO</p>
+      <p>{sounds}</p>
     </div >;
   }
 }
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      bankSet: soundBank
+    }
+  }
+
   render() {
     return (
       <div id="drum-machine" className="App">
-       
+
         <Display/>
-        <PadBank name="Sara"/>
+        <PadBank soundBank={this.state.bankSet}/>
       </div>
     );
   }
