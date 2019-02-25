@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 
-const soundBank = [
+const defaultSoundBank = [
   {
     keyCode: 81,
     keyTrigger: 'Q',
@@ -54,7 +54,6 @@ class Display extends React.Component {
 
   render() {
     return <header id="display" className="App-header">
-      <p>Display from component To be implemented</p>
       <p>{this.props.text}</p>
     </header>
 
@@ -94,7 +93,7 @@ class DrumButton extends React.Component {
     const sound = document.getElementById(this.props.keyTrigger);
     this
       .props
-      .displaySoundFileName(this.props.soundId);
+      .updateDisplaySoundFileName(this.props.soundId);
 
     sound.play();
 
@@ -102,6 +101,7 @@ class DrumButton extends React.Component {
 
   render() {
     return (
+
       <div id={this.props.soundId} onClick={this.playSound}>
         <audio
           id={this.props.keyTrigger}
@@ -122,7 +122,7 @@ class PadBank extends React.Component {
       .soundBank
       .map((drumObj, i, padBankArr) => {
         return (<DrumButton
-          displaySoundFileName={this.props.displaySoundFileName}
+          updateDisplaySoundFileName={this.props.updateDisplaySoundFileName}
           soundId={padBankArr[i].id}
           key={padBankArr[i].keyTrigger}
           keyCode={padBankArr[i].keyCode}
@@ -130,10 +130,11 @@ class PadBank extends React.Component {
           source={padBankArr[i].url}/>)
       });
 
-    return <div className="padBank">
-
-      <div>{padBank}</div>
-    </div >;
+    return (
+      <div className="padBank">
+        <div>{padBank}</div>
+      </div >
+    );
   }
 }
 
@@ -142,15 +143,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bankSet: soundBank,
+      bankSet: defaultSoundBank,
       display: "-"
     }
-    this.displaySoundFileName = this
-      .displaySoundFileName
+
+    this.updateDisplaySoundFileName = this
+      .updateDisplaySoundFileName
       .bind(this);
   }
+  // TODO
+  changeSoundBank(soundBank){
+    console.log("to be implemented");
+    this.setState({bankSet: soundBank});
+  }
 
-  displaySoundFileName(name) {
+  updateDisplaySoundFileName(name) {
     this.setState({display: name});
   }
 
@@ -162,7 +169,8 @@ class App extends Component {
 
         <PadBank
           soundBank={this.state.bankSet}
-          displaySoundFileName={this.displaySoundFileName}/> {this.state.display}
+          updateDisplaySoundFileName={this.updateDisplaySoundFileName}/>
+
       </div>
 
     );
