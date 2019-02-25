@@ -60,36 +60,82 @@ class Display extends React.Component {
   }
 }
 
-class PadBank extends React.Component {
+class DrumButton extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isToggleOn: true
+    };
+
+    // This binding is necessary to make `this` work in the callback
+    this.playSound = this
+      .playSound
+      .bind(this);
+    this.handleKeyPress = this
+      .handleKeyPress
+      .bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress(e) {
+    if (e.keyCode === this.props.keyCode) {
+      this.playSound();
+    }
+  }
+
+  playSound(e) {
+    const sound = document.getElementById(this.props.keyTrigger);
+    sound.play();
   }
 
   render() {
-    const sounds = this
+    return (
+      <div id={this.props.soundId} onClick={this.playSound}>
+        <audio
+          controls
+          id={this.props.keyTrigger}
+          src={this.props.source}
+          onKeyPress={this.handleKeyPress}></audio>
+        {this.props.keyTrigger}
+      </div>
+
+    )
+  }
+}
+
+class PadBank extends React.Component {
+
+  render() {
+    const padBank = this
       .props
       .soundBank
       .map((drumObj, i, padBankArr) => {
-        return (
-          <div key={padBankArr[i].keyTrigger}>
-
-            <p>{padBankArr[i].keyCode}</p>
-            <audio controls src={padBankArr[i].url}></audio>
-
-          </div>
-        )
-
+        return (<DrumButton
+          soundId={padBankArr[i].id}
+          key={padBankArr[i].keyTrigger}
+          keyCode={padBankArr[i].keyCode}
+          keyTrigger={padBankArr[i].keyTrigger}
+          source={padBankArr[i].url}/>)
       });
 
     return <div className="padBank">
+
       <p>TODO</p>
-      <p>{sounds}</p>
+      <div>{padBank}</div>
+
     </div >;
   }
 }
 
 class App extends Component {
-
+  /* add more sound banks*/
   constructor(props) {
     super(props);
     this.state = {
