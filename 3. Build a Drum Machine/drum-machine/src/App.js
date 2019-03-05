@@ -119,12 +119,11 @@ class Display extends React.Component {
 
     }
 }
-// redo drum buttons
+
 class DrumButton extends React.Component {
     constructor(props) {
         super(props);
 
-        // This binding is necessary to make `this` work in the callback
         this.playSound = this
             .playSound
             .bind(this);
@@ -151,10 +150,11 @@ class DrumButton extends React.Component {
 
     playSound(e) {
         const sound = document.getElementById(this.props.keyTrigger);
+
         this
             .props
             .updateDisplaySoundFileName(this.props.soundId);
-
+        sound.volume = this.props.audioVolume;
         sound.play();
 
     }
@@ -181,6 +181,10 @@ class PadBank extends React.Component {
         const drumButtons = soundFiles.map((drumObj, i, soundFilesArr) => {
             return (< DrumButton updateDisplaySoundFileName = {
                 this.props.updateDisplaySoundFileName
+
+            }
+            audioVolume = {
+                this.props.audioVolume
             }
             soundId = {
                 soundFilesArr[i].id
@@ -215,7 +219,7 @@ class Controls extends Component {
         const soundSetName = event.target.value;
         this
             .props
-            .changeSoundBanks(soundSetName);
+            .updateSoundBankAndDisplay(soundSetName);
     }
 
     makeSoundOptions() {
@@ -252,10 +256,30 @@ class Controls extends Component {
         )
     }
 }
+class VolumeControl extends Component {
 
+    onChange(event) {
+
+        this
+            .props
+            .changeVolume(event.target.value / 100)
+
+    }
+    render() {
+
+        return (<input
+            type="range"
+            min="1"
+            max="100"
+            className="slider"
+            id="volume"
+            onChange={this
+            .onChange
+            .bind(this)}/>)
+    }
+
+}
 class App extends Component {
-    /* add more sound banks */
-
 
     constructor(props) {
         super(props);
@@ -263,24 +287,45 @@ class App extends Component {
             bankSets: soundBanks,
             currentBankSet: soundBanks[0],
             display: "-",
-            currentsoundBanksName: "default"
+            currentsoundBanksName: "default",
+            audioVolume: 0.5
         }
+
+        this.changeVolume = this
+            .changeVolume
+            .bind(this);
 
         this.updateDisplaySoundFileName = this
             .updateDisplaySoundFileName
             .bind(this);
 
-        this.changeSoundBanks = this
-            .changeSoundBanks
+        this.updateSoundBankAndDisplay = this
+            .updateSoundBankAndDisplay
             .bind(this);
     }
 
+    changeCurrentSoundBankName(SoundBankName) {
 
-    // Requires testing
-    // function does three things
+        this.setState({currentsoundBanksName: SoundBankName});
+
+    }
+
+    // Requires testing function does three things
     changeSoundBanks(newSoundBankName) {
-        // change the current sound bank name
-        this.setState({currentsoundBanksName: newSoundBankName});
+
+        const soundBank = this.retrieveSoundBankViaName(newSoundBankName);
+
+        this.setState({currentBankSet: soundBank});
+
+    }
+
+    changeVolume(volume) {
+
+        this.setState({audioVolume: volume});
+
+    }
+
+    retrieveSoundBankViaName(name) {
 
         // retrieve all sound banks
         const availableSoundBanks = this.state.bankSets;
@@ -291,7 +336,7 @@ class App extends Component {
 
             const soundBank = availableSoundBanks[index];
 
-            if (soundBank.soundBanksName === newSoundBankName) {
+            if (soundBank.soundBanksName === name) {
                 console.log("true");
                 selectedSoundBank = soundBank;
                 break;
@@ -299,25 +344,39 @@ class App extends Component {
 
         }
 
-        this.setState({currentBankSet: selectedSoundBank});
+        return selectedSoundBank;
+
     }
 
     updateDisplaySoundFileName(name) {
+
         this.setState({display: name});
+
+    }
+    updateSoundBankAndDisplay(newSoundBankName) {
+
+        this.changeCurrentSoundBankName(newSoundBankName);
+        this.changeSoundBanks(newSoundBankName)
+
     }
 
     render() {
         return (
             <div id="drum-machine" className="App">
+            
                 <Display text={this.state.display}/>
+
                 <PadBank
+                    audioVolume={this.state.audioVolume}
                     currentsoundBanksName={this.state.currentsoundBanksName}
                     currentBankSet={this.state.currentBankSet}
                     updateDisplaySoundFileName={this.updateDisplaySoundFileName}/>
+
                 <div className="controls">
                     <Controls
-                        changeSoundBanks={this.changeSoundBanks}
+                        updateSoundBankAndDisplay={this.updateSoundBankAndDisplay}
                         bankSets={this.state.bankSets}/>
+                    <VolumeControl changeVolume={this.changeVolume}/>
                 </div>
             </div>
         );

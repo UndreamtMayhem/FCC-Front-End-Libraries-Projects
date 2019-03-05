@@ -1,6 +1,7 @@
-# feature 1
-- keys play sound
-
+# features
+- add volume
+- display sound bank name to ui
+- add more sound banks
 
 
 
