@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
+import './drum.css';
 
 const soundBanks = [
     {
-        soundBanksName: "default",
+        soundBanksName: "Default",
         soundFiles: [
             {
                 keyCode: 81,
@@ -54,7 +55,7 @@ const soundBanks = [
 
         ]
     }, {
-        soundBanksName: "extra",
+        soundBanksName: "Extra",
         soundFiles: [
             {
                 keyCode: 81,
@@ -111,11 +112,36 @@ const soundBanks = [
 class Display extends React.Component {
 
     render() {
-        return <header id="display" className="App-header">
-            <p>
-                {this.props.text}
-            </p>
-        </header>
+        return (
+            <header id="display" className="top">
+                <div className="power-buttons">
+                    <button className="power-button">Off</button>
+                </div>
+                <div className="Drum-display">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Previous</th>
+                                <th>Next</th>
+                                <th>*</th>
+                                <th>Load</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                    <div className="categories">
+                        <h2 className="logo">{this.props.text}</h2>
+
+                        <Controls
+                            updateSoundBankAndDisplay={this.props.updateSoundBankAndDisplay}
+                            bankSets={this.props.bankSets}/>
+
+                    </div>
+
+                </div>
+
+            </header>
+        )
 
     }
 }
@@ -155,19 +181,21 @@ class DrumButton extends React.Component {
             .props
             .updateDisplaySoundFileName(this.props.soundId);
         sound.volume = this.props.audioVolume;
+        sound.currentTime = 0;
         sound.play();
 
     }
 
     render() {
+        var myClasses = 'drum-button ' + this.props.id;
         return (
 
-            <div id={this.props.soundId} onClick={this.playSound}>
+            <div id={this.props.soundId} onClick={this.playSound} className={myClasses}>
                 <audio
                     id={this.props.keyTrigger}
                     src={this.props.source}
                     onKeyPress={this.handleKeyPress}></audio>
-                {this.props.keyTrigger}
+                <p className="button-text">{this.props.keyTrigger}</p>
             </div>
         )
     }
@@ -182,6 +210,9 @@ class PadBank extends React.Component {
             return (< DrumButton updateDisplaySoundFileName = {
                 this.props.updateDisplaySoundFileName
 
+            }
+            id = {
+                i
             }
             audioVolume = {
                 this.props.audioVolume
@@ -205,7 +236,7 @@ class PadBank extends React.Component {
 
         return (
             <div className="padBank">
-                <div>
+                <div className="drum-buttons">
                     {drumButtons}
                 </div>
             </div>
@@ -267,15 +298,19 @@ class VolumeControl extends Component {
     }
     render() {
 
-        return (<input
-            type="range"
-            min="1"
-            max="100"
-            className="slider"
-            id="volume"
-            onChange={this
-            .onChange
-            .bind(this)}/>)
+        return (
+            <div className="slidecontainer">
+                <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    className="slider"
+                    id="volume"
+                    onChange={this
+                    .onChange
+                    .bind(this)}/>
+            </div>
+        )
     }
 
 }
@@ -359,24 +394,36 @@ class App extends Component {
         this.changeSoundBanks(newSoundBankName)
 
     }
+    /*
+
+
+<Controls
+                            updateSoundBankAndDisplay={this.updateSoundBankAndDisplay}
+                            bankSets={this.state.bankSets}/>
+
+*/
 
     render() {
         return (
             <div id="drum-machine" className="App">
-            
-                <Display text={this.state.display}/>
 
-                <PadBank
-                    audioVolume={this.state.audioVolume}
-                    currentsoundBanksName={this.state.currentsoundBanksName}
-                    currentBankSet={this.state.currentBankSet}
-                    updateDisplaySoundFileName={this.updateDisplaySoundFileName}/>
+                <Display
+                    text={this.state.display}
+                    updateSoundBankAndDisplay={this.updateSoundBankAndDisplay}
+                    bankSets={this.state.bankSets}/>
+                <div className="bottom">
 
-                <div className="controls">
-                    <Controls
-                        updateSoundBankAndDisplay={this.updateSoundBankAndDisplay}
-                        bankSets={this.state.bankSets}/>
-                    <VolumeControl changeVolume={this.changeVolume}/>
+                    <div className="controls">
+                        <p className="logo">DrumKit</p>
+                        <VolumeControl changeVolume={this.changeVolume}/>
+                    </div>
+
+                    <PadBank
+                        audioVolume={this.state.audioVolume}
+                        currentsoundBanksName={this.state.currentsoundBanksName}
+                        currentBankSet={this.state.currentBankSet}
+                        updateDisplaySoundFileName={this.updateDisplaySoundFileName}/>
+
                 </div>
             </div>
         );

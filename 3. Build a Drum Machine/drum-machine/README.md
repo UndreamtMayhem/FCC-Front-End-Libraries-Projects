@@ -1,6 +1,6 @@
 # features
-- add volume
 - display sound bank name to ui
+- design ui
 - add more sound banks
 
 
