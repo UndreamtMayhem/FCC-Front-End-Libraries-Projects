@@ -1,8 +1,16 @@
+body {
+    background: #00d2ff;
+}
+
 #root {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 1rem;
+}
+
+.title {
+    color: #fff;
 }
 
 #display {

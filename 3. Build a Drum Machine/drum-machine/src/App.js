@@ -115,6 +115,8 @@ class Display extends React.Component {
         return (
             <header id="display" className="top">
                 <div className="power-buttons">
+                    <h1 className="title">
+                        FCC: Drum Machine</h1>
                     <button className="power-button">Off</button>
                 </div>
                 <div className="Drum-display">
@@ -127,7 +129,6 @@ class Display extends React.Component {
                                 <th>Load</th>
                             </tr>
                         </thead>
-
                     </table>
                     <div className="categories">
                         <h2 className="logo">{this.props.text}</h2>
@@ -137,12 +138,9 @@ class Display extends React.Component {
                             bankSets={this.props.bankSets}/>
 
                     </div>
-
                 </div>
-
             </header>
         )
-
     }
 }
 
@@ -189,14 +187,21 @@ class DrumButton extends React.Component {
     render() {
         var myClasses = 'drum-button ' + this.props.id;
         return (
+            <div>
+                <p className="button-text">
+                    <span>{this.props.id}:
+                    </span>
+                    {this.props.name}</p>
 
-            <div id={this.props.soundId} onClick={this.playSound} className={myClasses}>
-                <audio
-                    id={this.props.keyTrigger}
-                    src={this.props.source}
-                    onKeyPress={this.handleKeyPress}></audio>
-                <p className="button-text">{this.props.keyTrigger}</p>
+                <div id={this.props.soundId} onClick={this.playSound} className={myClasses}>
+                    <p>{this.props.keyTrigger}</p>
+                    <audio
+                        id={this.props.keyTrigger}
+                        src={this.props.source}
+                        onKeyPress={this.handleKeyPress}></audio>
+                </div>
             </div>
+
         )
     }
 }
@@ -214,8 +219,12 @@ class PadBank extends React.Component {
             id = {
                 i
             }
+
             audioVolume = {
                 this.props.audioVolume
+            }
+            name = {
+                soundFilesArr[i].id
             }
             soundId = {
                 soundFilesArr[i].id
@@ -236,6 +245,7 @@ class PadBank extends React.Component {
 
         return (
             <div className="padBank">
+                <p className="master">Pads</p>
                 <div className="drum-buttons">
                     {drumButtons}
                 </div>
@@ -414,7 +424,7 @@ class App extends Component {
                 <div className="bottom">
 
                     <div className="controls">
-                        <p className="logo">DrumKit</p>
+                        <p className="master">Master</p>
                         <VolumeControl changeVolume={this.changeVolume}/>
                     </div>
 
