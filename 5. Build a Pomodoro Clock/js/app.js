@@ -1,3 +1,11 @@
+/**
+ * Free Code camp Javascript Calculator.
+
+ * @module Pomodoro
+ * @version 1.0.0
+ * @author UndreamtMayhem <undreamtmayhem@gmail.com>
+ */
+
 //break button and set value
 
 //possible look
@@ -24,6 +32,18 @@ var toggled = false
 
 var reset = false;
 
+
+
+
+/**
+ * Display equation and result to UI
+ * @module Calculator
+ * @method secondsToHms
+ * @param {number} d
+ * @param {number} displayToUpdate
+ * @return {number} Value
+ */
+
 function secondsToHms(d, displayToUpdate) {
 
     d = Number(d);
@@ -31,15 +51,22 @@ function secondsToHms(d, displayToUpdate) {
     var m = Math.floor(d % 3600 / 60);
 
     var s = Math.floor(d % 3600 % 60);
-    console.log(m);
+
     displayToUpdate.textContent = "" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
 }
 
 
-// repetitive
+
+/**
+ * Runs breaktimer
+ * @module Calculator
+ * @method breakTimer
+ * @param {number} breakLength
+ */
 function breakTimer(breakLength) {
+    // repetitive
     var breakLength = (pausedTime === 0 ? breakLength : pausedTime);
-    var refreshIntervalId = setInterval(function () {
+    var refreshIntervalId = setInterval(function() {
 
         secondsToHms(breakLength, breakTimerElem);
 
@@ -52,10 +79,8 @@ function breakTimer(breakLength) {
             startButton.innerText = "Start";
             timerRunning = false;
 
-        }
+        } else if (breakRunning === false) {
 
-        else if (breakRunning === false) {
-            //sessionLength = counter;
             pausedTime = breakLength;
             clearInterval(refreshIntervalId);
 
@@ -66,60 +91,69 @@ function breakTimer(breakLength) {
             startButton.innerText = "Start Break";
             pausedTime = 0;
         }
-       
+
     }, 1000);
 }
 
+
+/**
+ * ToggleTimer between modes
+ * @module Calculator
+ * @method toggleTimer
+ * @param {number} counter
+ * @param {number} breakLength
+ * @param {number} start
+ */
 function toggleTimer(counter, breakLength, start) {
     // if paused is equal to zero then the timer hasnt been paused used the value of the session length
-    
+
     var counter = (pausedTime === 0 ? counter : pausedTime);
 
     var breakLength = breakLength;
 
 
-    function runTimer(){
+    function runTimer() {
         secondsToHms(counter, clockTimer);
         secondsToHms(breakLength, breakTimerElem);
-            counter--;
-            if (counter < 0) {
-            
-                clearInterval(refreshIntervalId);
+        counter--;
+        if (counter < 0) {
 
-                startButton.innerText = "Stop Break";
+            clearInterval(refreshIntervalId);
 
-                breakRunning = true;
+            startButton.innerText = "Stop Break";
 
-                timerRunning = false;
+            breakRunning = true;
 
-                pausedTime = 0;
-                // maybe run set timeout so there a bit of a break inbetween
-                breakTimer(breakLength);
+            timerRunning = false;
 
-            }
-            // replace name with paused
-            else if (timerRunning === false) {
+            pausedTime = 0;
+            // maybe run set timeout so there a bit of a break inbetween
+            breakTimer(breakLength);
 
-                pausedTime = counter;
+        }
+        // replace name with paused
+        else if (timerRunning === false) {
 
-                clearInterval(refreshIntervalId);
+            pausedTime = counter;
 
-            }
-            // sliders toggled stop time
-            else if (toggled) {
-                console.log("toggle working");
-                pausedTime = 0;
-                clearInterval(refreshIntervalId);
+            clearInterval(refreshIntervalId);
 
-                startButton.innerText = "Start";
-            }
+        }
+        // sliders toggled stop time
+        else if (toggled) {
+            console.log("toggle working");
+            pausedTime = 0;
+            clearInterval(refreshIntervalId);
+
+            startButton.innerText = "Start";
+        }
     }
     if (start) {
-       
-      
-        
-        var refreshIntervalId = setInterval(function () {
-            if(reset){
+
+
+
+        var refreshIntervalId = setInterval(function() {
+            if (reset) {
                 console.log('in reset');
                 console.log(pausedTime);
                 reset = false;
@@ -128,33 +162,40 @@ function toggleTimer(counter, breakLength, start) {
                 counter = (pausedTime === 0 ? counter : pausedTime);
                 clearInterval(refreshIntervalId);
                 runTimer();
-                
 
-            }
-            else {
+
+            } else {
 
                 runTimer();
             }
-            
+
         }, 1000);
     }
 }
 
-startButton.addEventListener('click', function () {
 
+
+/**
+ * Start button onClick
+ * @module Calculator
+ * @event startButton
+ * @param {number} counter
+ * @param {number} breakLength
+ * @param {number} start
+ */
+startButton.addEventListener('click', function() {
 
     // get session length and break length
     var sessionLength = parseInt(document.getElementById('session-length').innerText) * 60;
-    
+
     var breakLength = parseInt(document.getElementById('break-length').innerText) * 60;
 
-    
-  //edit
-    //Hit start button run timer 
-    
-    // break is false
 
-    // toggle is false user has selected a time
+    /**
+     * Start button is pressed
+     * users isnt on break
+     * and toggle is false
+     */
     if (this.innerText === "Start") {
 
         this.innerText = "Stop";
@@ -166,22 +207,22 @@ startButton.addEventListener('click', function () {
         toggled = false;
 
         toggleTimer(sessionLength, breakLength, timerRunning);
-        //toggleTimer(3, breakLength, timerRunning);
     }
-
-    // If button is stop stop the timer
+    /**
+     * If stop button is pressed
+     * stop the timer
+     */
     else if (this.innerText === "Stop") {
 
         timerRunning = false;
-        //note sure necessary
         breakRunning = false;
 
         this.innerText = "Start";
-
-    }
-
-    //NEEDS TO GET VALUE FROM DOM
-    else if (this.innerText === "Start Break") {
+        /**
+         * If its time to start break
+         * stop the timer
+         */
+    } else if (this.innerText === "Start Break") {
 
         timerRunning = false;
 
@@ -190,10 +231,13 @@ startButton.addEventListener('click', function () {
         toggled = false;
 
         this.innerText = "Stop Break"
-        
+
         breakTimer(breakLength);
-    }
-    else if (this.innerText === "Stop Break") {
+        /**
+        * Stop the break
+  
+    */
+    } else if (this.innerText === "Stop Break") {
         timerRunning = false;
         breakRunning = false;
         toggled = false;
@@ -204,42 +248,40 @@ startButton.addEventListener('click', function () {
 
 function sliderButtons(minusButton, plusButton, lengthOfTime, displayElem) {
     // requires checks no more than 25 mins no less than zero
-    
+
     var minusButton = document.getElementById(minusButton);
 
     var plusButton = document.getElementById(plusButton);
 
-    
-    minusButton.addEventListener('click', function () {
+
+    minusButton.addEventListener('click', function() {
         var valueButton = document.getElementById(lengthOfTime);
 
         var sessionLength = parseInt(valueButton.innerText);
         console.log(sessionLength);
-        if(sessionLength <=1 ){
+        if (sessionLength <= 1) {
             valueButton.innerText = 1;
-        }
-        else {
+        } else {
             console.log(displayElem);
-             sessionLength = sessionLength - 1;
-             
-             secondsToHms(sessionLength * 60, displayElem);
+            sessionLength = sessionLength - 1;
 
-        valueButton.innerText = sessionLength;
-        pausedTime = 0;
-        toggled = true;
+            secondsToHms(sessionLength * 60, displayElem);
+
+            valueButton.innerText = sessionLength;
+            pausedTime = 0;
+            toggled = true;
 
 
         }
     });
 
-    plusButton.addEventListener('click', function () {
+    plusButton.addEventListener('click', function() {
         var valueButton = document.getElementById(lengthOfTime);
 
         var sessionLength = parseInt(valueButton.innerText);
-        if (sessionLength >= 25){
+        if (sessionLength >= 25) {
             valueButton.innerText = 25;
-        }
-        else {
+        } else {
             console.log(displayElem);
             sessionLength = sessionLength + 1;
             pausedTime = 0;
@@ -249,8 +291,7 @@ function sliderButtons(minusButton, plusButton, lengthOfTime, displayElem) {
 
             toggled = true
 
-        }
-       ;
+        };
 
     });
 }
@@ -263,25 +304,25 @@ sliderButtons('minus-session', 'plus-session', 'session-length', clockTimer);
 
 
 
-resetButton.addEventListener('click', function () {
+resetButton.addEventListener('click', function() {
 
 
     // get session length and break length
     var sessionLength = parseInt(document.getElementById('session-length').innerText) * 60;
-    
+
     var breakLength = parseInt(document.getElementById('break-length').innerText) * 60;
 
     //var breakTimer = document.getElementById('break-timer');
     //breakTimer.innerText = document.getElementById('break-length').innerText + ":00";
-    
-    
+
+
     //Hit start button run timer 
-    
+
     // break is false
 
     // toggle is false user has selected a time
     if (this.innerText === "Reset") {
-    var breakLength = parseInt(document.getElementById('break-length').innerText) * 60;
+        var breakLength = parseInt(document.getElementById('break-length').innerText) * 60;
         //how do i put a zero before
 
         timerRunning = true;
@@ -293,19 +334,9 @@ resetButton.addEventListener('click', function () {
         reset = true;
         startButton.innerText = "Start";
 
-        
+
         toggleTimer(sessionLength, breakLength, timerRunning);
 
 
     }
 });
-
-
-
-
-
-
-
-
-
-
