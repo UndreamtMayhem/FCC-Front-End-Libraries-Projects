@@ -7,29 +7,36 @@ body {
     width: 100%;
     overflow-x: hidden;
 }
+
+
 /* NAV BAR */
+
 nav {
     box-shadow: 19px 1px 20px grey;
     width: 100%;
 }
+
 #bg-change {
     background-color: #6BCC65;
     color: white;
 }
+
 nav .top-nav {
     padding: 10px 0 20px 10px;
     border-bottom: #17bf63;
-
 }
+
 nav .top-nav i {
     font-size: 40px;
 }
+
 nav .top-nav h1 {
     text-align: center;
     padding: 0px;
     margin: 0px;
     font-size: 32px;
 }
+
 nav ul {
     text-align: center;
     margin: 0;
@@ -37,6 +44,7 @@ nav ul {
     border-bottom: 1px solid grey;
     padding: 20px 0px;
 }
+
 nav ul li {
     list-style: none;
     display: inline;
@@ -45,16 +53,20 @@ nav ul li {
     font-size: 22px;
     padding: 9px 13px;
 }
+
 nav ul li.active {
-    border-bottom:5px #17bf63 solid;
+    border-bottom: 5px #17bf63 solid;
 }
-input[type=checkbox]:checked{
-    border-bottom:5px #17bf63 solid;
-} 
+
+input[type=checkbox]:checked {
+    border-bottom: 5px #17bf63 solid;
+}
+
 
 /* Quote Box */
+
 .quote-box {
-    position:relative;
+    position: relative;
     width: 60%;
     margin: 42px auto;
     background-color: #fff;
@@ -63,106 +75,137 @@ input[type=checkbox]:checked{
     padding: 10px 20px;
 }
 
+
 /* Banner */
-.banner-left, .banner-right, .main-button, .share-button  {
+
+.banner-left,
+.banner-right,
+.main-button,
+.share-button {
     display: inline-block;
     padding: 10px 0px;
 }
+
 .banner-left img {
     border-radius: 14%;
     width: 50px;
-   
 }
+
 .banner-right {
     top: auto;
     bottom: 13px;
     position: relative;
+    padding-left: 10px;
 }
-.banner-right h3, p{
+
+.banner-right h3,
+p {
     margin: 0px;
 }
+
 .main-button {
     float: right;
 }
-.main-button  button {
+
+.main-button button {
     padding: 10px;
     border-radius: 13px;
     background-image: linear-gradient(rgb(255, 255, 255), rgb(230, 236, 240));
     border: 2px solid #e6ecf0;
     font-size: 16px;
 }
+
 .main-button button i {
     color: #1da1f2;
 }
+
 .main-button button span {
     margin-left: 10px;
 }
 
-
 .quote {
     padding-bottom: 30px;
-    
 }
-.quote-text, .quote-author {
+
+.quote-text,
+.quote-author {
     width: 100%;
     padding: 10px 0 10px 10px;
 }
+
 .quote #text {
     font-size: 22px;
     padding-left: 10px;
     font-weight: bold;
 }
-.timestamp {
+
+#timestamp {
     color: #657786;
     padding: 10px 0px;
 }
+
 .retweets {
-     border-bottom: 1px solid #e6ecf0;
+    border-bottom: 1px solid #e6ecf0;
     border-top: 1px solid #e6ecf0;
 }
+
 .retweets ul {
     margin: 0px 0 0 0;
     padding: 0px 0 0 0;
     width: 95%;
     list-style: none;
 }
+
 .retweets li {
     float: left;
     min-width: 72px;
     margin-right: 22px;
 }
+
 .retweets li strong {
     display: block;
     color: lightskyblue;
 }
+
 .retweets .recent-likes {
     border-left: 1px solid #e6ecf0;
     padding: 4px 0 0 6px;
 }
+
 .retweets span {
     float: left;
 }
+
 .retweets li img {
     margin-right: 12px;
     border-radius: 4px;
 }
-.clearfix{
+
+.clearfix {
     clear: both;
 }
+
 .share-button {
     padding: 10px 0 0 0;
 }
-.buttons, .share-button a {
+
+.buttons,
+.share-button a {
     display: inline-block;
 }
-.buttons, .share-button  i {
+
+.buttons,
+.share-button i {
     padding: 10px;
-    color:  #1da1f2;
+    color: #1da1f2;
     font-size: 26px;
 }
-.buttons .main-button, .share-button {
+
+.buttons .main-button,
+.share-button {
     padding: 0px;
 }
+
 .share-button button {
     float: left;
     margin: 10px 0px;
@@ -171,16 +214,24 @@ input[type=checkbox]:checked{
     border: 2px solid #e6ecf0;
     font-size: 16px;
 }
-.buttons, .share-button  i {
+
+.buttons,
+.share-button i {
     font-size: 21px;
 }
+
 footer {
     background-color: #2C532A;
     padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
-footer  p {
+
+footer p {
     color: white;
 }
+
 footer a {
     text-decoration: none;
     color: white;
@@ -192,22 +243,21 @@ footer a {
         padding-top: 0px;
         padding-right: 10px;
     }
-   
     nav ul li {
         font-size: 19px;
         padding: 7px 5px;
     }
     #famous-quote {
-        border-left:0px;
+        border-left: 0px;
         display: block;
     }
     #movie-quote {
-        border-left:0px;
+        border-left: 0px;
         border-right: 0px;
         display: block;
     }
     .main-button {
-        float: none; 
+        float: none;
     }
     .retweets li {
         margin-right: 12px;
@@ -220,7 +270,6 @@ footer a {
     }
 }
 
-
 @media screen and (min-width:321px) and (max-width:378px) {
     nav ul li {
         font-size: 19px;
@@ -230,15 +279,14 @@ footer a {
         width: 80%;
     }
     #famous-quote {
-        border-left:0px;
+        border-left: 0px;
     }
     #movie-quote {
-        border-left:0px;
+        border-left: 0px;
         border-right: 0px;
     }
-    
     .main-button {
-        float: none; 
+        float: none;
     }
     .retweets li {
         margin-right: 12px;
@@ -247,8 +295,9 @@ footer a {
         margin-right: 4px;
     }
 }
+
 @media screen and (min-width:378px) and (max-width:639px) {
-   .quote-box {
+    .quote-box {
         width: 80%;
     }
     nav .top-nav h1 {
@@ -256,7 +305,6 @@ footer a {
         padding-top: 40px;
     }
     nav ul {
-      
         padding: 20px 0px;
     }
     nav ul li {
@@ -264,10 +312,10 @@ footer a {
         padding: 8px 11px;
     }
     #famous-quote {
-        border-left:0px;
+        border-left: 0px;
     }
     #movie-quote {
-        border-left:0px;
+        border-left: 0px;
         border-right: 0px;
     }
     .retweets li {
@@ -276,11 +324,4 @@ footer a {
     .retweets li img {
         margin-right: 4px;
     }
- 
 }
-/*@media screen and (min-width:640px) and (max-width:959px) {}
-@media screen and (min-width:640px) and (max-width:2560px) {}
-
-@media screen and (min-width:1280px) and (max-width:1599px) {}
-@media screen and (min-width:1600px) {}
-@media screen and (min-width:1920px) {}*/
