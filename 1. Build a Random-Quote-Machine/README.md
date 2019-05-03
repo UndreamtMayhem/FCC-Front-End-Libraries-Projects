@@ -1,6 +1,6 @@
 # FCC-Build a Random Quote Machine
 
-## tools
+## Tools used
 
 - HTML
 - CSS
@@ -9,11 +9,13 @@
 - Ajax request
 
 ## image
+![project](https://github.com/UndreamtMayhem/FCC-Front-End-Libraries-Projects/blob/master/1.%20Build%20a%20Random-Quote-Machine/design.PNG)
 
-## Explain code
+## How the app executes
 
 ```
 MODULE.initApp = function() {
+
     MODULE.setBackgroundColor();
 
     quoteType = MODULE.getQuoteType();
@@ -23,3 +25,6 @@ MODULE.initApp = function() {
     MODULE.displayTimeAndDayToDom();
 };
 ```
+## Todo
+- add project to codepen
+- add link
