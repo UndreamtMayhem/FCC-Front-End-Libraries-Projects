@@ -1,24 +1,26 @@
-// display equation and result to UI
-// ERROR CHECK LIKE HELL
-// THINK OF ALL SCENARIOS
+/**
+ * Free Code camp Javascript Calculator.
 
+ * @module Calculator
+ * @version 1.0.0
+ * @author UndreamtMayhem <undreamtmayhem@gmail.com>
+ */
+
+
+/**
+ * Display equation and result to UI
+ * @module Calculator
+ * @method displayUI
+ * @return {number} Value
+ */
 function displayUI(value) {
     var entryBoxx = document.getElementById('entry-box');
     if (value === 'clear') {
         entryBoxx.textContent = '';
-    }
-    else {
+    } else {
         entryBoxx.textContent += value;
     }
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -34,15 +36,21 @@ var isModulus = false;
 var isEqual = false;
 var isDecimal = false;
 
-// connected to operator buttons
+
+/**
+ * Display equation and result to UI
+ * @summary connected to operator buttons
+ * @module Calculator
+ * @method operationClicked
+ * @return {number} Value
+ */
 function operationClicked(value) {
     // add mod to all other operations
     if (value === '+' && entryBox !== '' && entryBox !== '-') {
         if (isAddition === true) {
             calculateAddition();
             isDecimal = false;
-        }
-        else {
+        } else {
             // do subtraction then add
             if (isSubtract) {
                 calculateSubtraction();
@@ -81,8 +89,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else if (isModulus) {
+            } else if (isModulus) {
                 calculateMod();
                 displayUI("clear");
                 displayUI(finalResult + " + ");
@@ -93,8 +100,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else {
+            } else {
                 displayUI("clear");
                 displayUI(entryBox + " + ");
                 //here is all it can go wrong
@@ -114,8 +120,7 @@ function operationClicked(value) {
         if (isSubtract === true) {
             calculateSubtraction();
             isDecimal = false;
-        }
-        else {
+        } else {
             // do addition then subtract
             if (isAddition) {
                 calculateAddition();
@@ -154,8 +159,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else if (isModulus) {
+            } else if (isModulus) {
                 calculateMod();
                 displayUI("clear");
                 displayUI(finalResult + " - ");
@@ -166,8 +170,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else {
+            } else {
                 displayUI("clear");
                 displayUI(entryBox + " - ");
                 finalResult = parseFloat(entryBox);
@@ -188,8 +191,7 @@ function operationClicked(value) {
         if (isMutliply === true) {
             calculateMutliply();
             isDecimal = false;
-        }
-        else {
+        } else {
             // do subtract then multiple
             if (isSubtract) {
                 calculateSubtraction();
@@ -228,8 +230,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else if (isModulus) {
+            } else if (isModulus) {
                 calculateMod();
                 displayUI("clear");
                 displayUI(finalResult + " * ");
@@ -240,8 +241,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else {
+            } else {
                 displayUI("clear");
                 displayUI(entryBox + " * ");
                 finalResult = parseFloat(entryBox);
@@ -261,8 +261,7 @@ function operationClicked(value) {
             console.log("running");
             calculateDivide();
             isDecimal = false;
-        }
-        else {
+        } else {
             // do subtract then divide
             if (isSubtract) {
                 calculateSubtraction();
@@ -302,8 +301,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else if (isModulus) {
+            } else if (isModulus) {
                 calculateMod();
                 displayUI("clear");
                 displayUI(finalResult + " / ");
@@ -314,8 +312,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = false;
-            }
-            else {
+            } else {
                 displayUI("clear");
                 displayUI(entryBox + " / ");
                 finalResult = parseFloat(entryBox);
@@ -362,8 +359,7 @@ function operationClicked(value) {
         if (isModulus === true) {
             calculateMod();
             isDecimal = false;
-        }
-        else {
+        } else {
             // do subtraction then mod
             if (isSubtract) {
                 calculateSubtraction();
@@ -402,8 +398,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = true;
-            }
-            else if (isAddition) {
+            } else if (isAddition) {
                 calculateDivide();
                 displayUI("clear");
                 displayUI(finalResult + " % ");
@@ -414,8 +409,7 @@ function operationClicked(value) {
                 isEqual = false;
                 isDecimal = false;
                 isModulus = true;
-            }
-            else {
+            } else {
                 displayUI("clear");
                 displayUI(entryBox + " % ");
                 finalResult = parseFloat(entryBox);
@@ -435,7 +429,7 @@ function operationClicked(value) {
         displayUI("clear");
         finalResult = 0.0;
     }
-    if (value == '.' && entryBox !== ''&& entryBox !== '-') {
+    if (value == '.' && entryBox !== '' && entryBox !== '-') {
         //if in add mode  act differently
         if ((isAddition || isSubtract || isMutliply || isDivide) && isDecimal === false) {
             //display is wrong
@@ -446,8 +440,7 @@ function operationClicked(value) {
             console.log(entryBox);
             displayUI(value);
             isDecimal = true;
-        }
-        else {
+        } else {
             if (isDecimal === false) {
                 console.log("inside entry box")
 
@@ -458,14 +451,8 @@ function operationClicked(value) {
                 //is now a decimeal must press a number
                 isDecimal = true;
 
-
-
             }
-
-
         }
-
-
     }
     if (value === '+/-' && entryBox === '') {
         if (isEqual) {
@@ -473,14 +460,15 @@ function operationClicked(value) {
             entryBox += '-';
             displayUI(entryBox);
             isEqual = false;
-        }
-        else {
+        } else {
             entryBox += '-';
             displayUI(entryBox);
         }
-
     }
 }
+
+
+
 
 // value of buttons
 function numberClicked(value) {
@@ -517,8 +505,7 @@ function numberClicked(value) {
             displayUI("" + value);
             isEqual = false;
         }
-    }
-    else {
+    } else {
         // Display UI
         displayUI('clear');
         entryBox += value;
@@ -558,12 +545,22 @@ function calculateDivide() {
     updateResult(sumEntry, "/");
     // swap the finalResult of sum into finalResult
 }
+
 function calculateMod() {
     //get the current value from the box add to the finalResult 
     var sumEntry = parseFloat(finalResult) % parseFloat(entryBox);
     updateResult(sumEntry, "%");
 }
 
+
+
+/**
+ * Update UI with result
+ * @module MODULE
+ * @method updateResult
+ * @param {string} sumEntry   
+ * @param {string} operation '+' '-' '*' '/'
+ */
 function updateResult(sumEntry, operation) {
     // swap the finalResult of sum into finalResult
     sumEntry = parseFloat(sumEntry).toPrecision(6);
