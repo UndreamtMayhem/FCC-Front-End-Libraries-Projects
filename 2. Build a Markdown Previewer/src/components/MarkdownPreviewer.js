@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import DisplayContainer from './components/DisplayContainer';
-import MarkDownEditor from './components/MarkDownEditor';
-var marked = require('marked');
+import DisplayContainer from './DisplayContainer';
+import MarkDownEditor from './MarkDownEditor';
+//var marked = require('marked');
 
 class MarkdownPreviewer extends Component {
   constructor(){
     super();
     this.state = {
-      convertedMarkdownText: "* apples \n * banana",
+      convertedMarkdownText: "* apples \n * banana \n ![placeholder](https://placeimg.com/450/250/any)",
       title: 'Blog Title'
     }
      this.changeMarkup = this.changeMarkup.bind(this);
@@ -27,6 +27,7 @@ class MarkdownPreviewer extends Component {
   render() {
     return (
       <div className="App">
+      
         <MarkDownEditor text={this.state.convertedMarkdownText} changeMarkup={this.changeMarkup} changeTitle={this.changeTitle}/>
         <DisplayContainer newText={this.state.convertedMarkdownText} title={this.state.title}/>
 
@@ -36,12 +37,3 @@ class MarkdownPreviewer extends Component {
 }
 
 export default MarkdownPreviewer;
-//<span dangerouslySetInnerHTML={this.rawMarkup(this.state.convertedMarkdownText)} />
-/*
-rawMarkup(value){
-  var rawMarkup = marked(value, {sanitize: true});
-  return{__html: rawMarkup };
-}
-
-
-*/

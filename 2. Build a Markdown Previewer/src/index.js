@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MarkdownPreviewer from './MarkdownPreviewer';
+import App from './App';
 
 
 ReactDOM.render(
-  <MarkdownPreviewer />,
+  <App />,
   document.getElementById('root')
 )

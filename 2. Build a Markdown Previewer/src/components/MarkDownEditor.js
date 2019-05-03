@@ -7,12 +7,15 @@ class MarkDownEditor extends Component {
       this.updateMarkup = this.updateMarkup.bind(this);
       this.upDateTitle = this.upDateTitle.bind(this);
   }
+  
   updateMarkup(event){
     this.props.changeMarkup(event.target.value);
   }
+
   upDateTitle(event){
     this.props.changeTitle(event.target.value);
   }
+
   render() {
     return (
       <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
