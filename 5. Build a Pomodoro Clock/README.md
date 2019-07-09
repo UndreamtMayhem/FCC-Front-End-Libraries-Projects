@@ -20,16 +20,7 @@ todo
 ## How the app executes
 
 ```
-MODULE.initApp = function() {
 
-    MODULE.setBackgroundColor();
-
-    quoteType = MODULE.getQuoteType();
-
-    MODULE.getQuoteAndSetDom(quoteType);
-
-    MODULE.displayTimeAndDayToDom();
-};
 ```
 ## Todo
 - add project to codepen
